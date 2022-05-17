@@ -1,42 +1,40 @@
 <html>
 <head>
-<title>APM Genre Hierarchy</title>
+<title>TSNE Deezer</title>
 <script src="force-graph.min.js"></script>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div id="title">Genres hierarchy</div>
+<div id="title">TSNE Deezer CAVs</div>
 
 <div id="instructions">
 	<div class="instruct"><i>Left-click:</i> move</div>
 	<div class="instruct"><i>Mouse-wheel/middle-click:</i> zoom</div>
 	<div class="instruct"><i>Hover:</i> display label</div>
-	<div class="instruct"><i>Click:</i> focus on node</div>    
+	<div class="instruct"><i>Click:</i> open corresponding playlist</div>    
 </div>
 
-<div id="note">Node colors represent <b>ground-truth genre clustering</b>.</div>
+<div id="note">
+Node colors are <b>random</b>.
+</div>
 
 <div id="graph"></div>
 
 <script>
 	const elem = document.getElementById('graph');
 	
-	fetch('apm_genres.json').then(res => res.json()).then(data => {  // deezergraph
+	fetch('tsne_deezer.json').then(res => res.json()).then(data => {
 		console.log(data)
 	
     	const Graph = ForceGraph()(elem)
-    		//.backgroundColor('rgb(17, 18, 31)')
+    		.enableNodeDrag(false)
     		.graphData(data) 
     		.nodeLabel('label')
-    		.nodeRelSize(10)
-    		.linkWidth(3)
-    		.enableNodeDrag(false)
-    		.onNodeClick(node => {
-       			Graph.centerAt(node.x, node.y, 1000);
-        		Graph.zoom(1.5, 2000);
-      		});
-    		
+    		.nodeRelSize(15)
+    		.nodeAutoColorBy('id')
+    		.linkHoverPrecision(100)
+    		.onNodeClick(node => window.open(`http://deezer.com/playlist/${node.id}`, '_blank'))
       
       });
   </script>
