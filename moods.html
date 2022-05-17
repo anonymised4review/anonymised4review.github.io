@@ -1,25 +1,29 @@
 <html>
 <head>
-<title>APM Genre Hierarchy</title>
+<title>APM Mood Hierarchy</title>
 <script src="force-graph.min.js"></script>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+<div id="title">Mood hierarchy</div>
+
 <div id="instructions">
-	<div class="title"><b>Genre hierarchy</b></div>
 	<div class="instruct"><i>Left-click:</i> move</div>
 	<div class="instruct"><i>Mouse-wheel/middle-click:</i> zoom</div>
 	<div class="instruct"><i>Hover:</i> display label</div>
 	<div class="instruct"><i>Click:</i> focus on node</div>    
 </div>
 
+<div id="note">Node colors represent <b>ground-truth genre clustering</b>.</div>
+
+
 <div id="graph"></div>
 
 <script>
 	const elem = document.getElementById('graph');
 	
-	fetch('apm_genres.json').then(res => res.json()).then(data => {  // deezergraph
+	fetch('apm_moods.json').then(res => res.json()).then(data => {  // deezergraph
 		console.log(data)
 	
     	const Graph = ForceGraph()(elem)
@@ -34,7 +38,6 @@
         		Graph.zoom(1.5, 2000);
       		});
     		
-      
       });
   </script>
 
