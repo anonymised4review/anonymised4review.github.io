@@ -1,12 +1,12 @@
 <html>
 <head>
-<title>Usage-based Hierarchy</title>
+<title>Top-1 baseline</title>
 <script src="../force-graph.min.js"></script>
 <link rel="stylesheet" href="../style.css">
 </head>
 <body>
 
-<div id="title"><em>H(S((V<sub>CF</sub>))</em>: Collaborative filtering based hierarchy</div>
+<div id="title"><em>Top-1</em> baseline</div>
 
 <div id="instructions">
 	<div class="instruct"><i>Left-click:</i> move</div>
@@ -17,12 +17,13 @@
 
 <div id="note">Node colors are <b>random</b>.</div>
 
+
 <div id="graph"></div>
 
 <script>
 	const elem = document.getElementById('graph');
 	
-	fetch('opt_usg.json').then(res => res.json()).then(data => {
+	fetch('simtop.json').then(res => res.json()).then(data => {
 		console.log(data)
 	
     	const Graph = ForceGraph()(elem)
@@ -34,6 +35,7 @@
     		.linkWidth(2)
     		.linkDirectionalParticles(1)
     		.onNodeClick(node => window.open(`http://deezer.com/playlist/${node.id}`, '_blank'))
+      
       });
   </script>
 
